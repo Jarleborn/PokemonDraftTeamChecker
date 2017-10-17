@@ -288,6 +288,7 @@ const rapidSpinMons = [
   'baltoy',
   'bergmite',
   'blastoise',
+  'blastoise-mega',
   'bounsweet',
   'claydol',
   'cloyster',

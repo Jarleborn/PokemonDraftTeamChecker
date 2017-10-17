@@ -189,9 +189,22 @@ function test(mons) {
 function monChecker(monToCheck) {
   return new Promise(function (resolve, reject) {
     var mon = {};
-    mon.name = monToCheck.name;
+    if (monToCheck.name === 'darmanitan-standard') {
+      mon.name = 'darmanitan';
+    } else if (monToCheck.name === 'meowstic-male') {
+      mon.name = 'meowstic';
+    } else if (monToCheck.name === 'gourgeist-average') {
+      mon.name = 'gourgeist';
+    } else if (monToCheck.name === 'keldeo-ordinary') {
+      mon.name = 'keldeo';
+    } else if (monToCheck.name === 'meloetta-aria') {
+      mon.name = 'meloetta';
+    } else {
+      mon.name = monToCheck.name;
+    }
+
     mon.type = monToCheck.types;
-    if (monToCheck.name === 'thundurus-incarnate') {
+    if (mon.name === 'thundurus-incarnate') {
       mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/thundurus.gif';
     } else if (mon.name === 'tornadus-incarnate') {
       mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/tornadus.gif';
@@ -199,8 +212,10 @@ function monChecker(monToCheck) {
       mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/landorus.gif';
     } else if (mon.name === 'shaymin-land') {
       mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/shaymin.gif';
+    } else if (mon.name === 'meowstic-male') {
+      mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/meowstic.gif';
     } else {
-      mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/' + monToCheck.name + '.gif';
+      mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/' + mon.name + '.gif';
     }
     mon.hazards = [];
     mon.removal = [];
@@ -289,7 +304,7 @@ var rocksMon = ['aerodactyl', 'aerodactyl-mega', 'aggron', 'aggron-mega', 'amaur
 
 var spikesMon = ['accelgor', 'budew', 'bunnelby', 'cacnea', 'cacturne', 'chesnaught', 'chespin', 'cloyster', 'crustle', 'delibird', 'deoxys', 'deoxys-Attack', 'deoxys-Defense', 'deoxys-Speed', 'diggersby', 'dwebble', 'ferroseed', 'ferrothorn', 'forretress', 'froslass', 'garbodor', 'glalie', 'golisopod', 'greninja', 'greninja-ash', 'klefki', 'maractus', 'omanyte', 'omastar', 'pineco', 'quilladin', 'qwilfish', 'roselia', 'roserade', 'scolipede', 'shelmet', 'skarmory', 'snorunt', 'trubbish', 'venipede', 'whirlipede', 'wimpod'];
 
-var rapidSpinMons = ['anorith', 'armaldo', 'avalugg', 'baltoy', 'bergmite', 'blastoise', 'bounsweet', 'claydol', 'cloyster', 'cryogonal', 'delibird', 'dhelmise', 'donphan', 'drilbur', 'excadrill', 'forretress', 'hitmonchan', 'hitmonlee', 'hitmontop', 'kabuto', 'kabutops', 'komala', 'pheromosa', 'pineco', 'sandshrew', 'sandshrew-alola', 'sandslash', 'sandslash-alola', 'shellder', 'spinda', 'squirtle', 'starmie', 'staryu', 'steenee', 'tentacool', 'tentacruel', 'torkoal', 'tsareena', 'tyrogue', 'wartortle'];
+var rapidSpinMons = ['anorith', 'armaldo', 'avalugg', 'baltoy', 'bergmite', 'blastoise', 'blastoise-mega', 'bounsweet', 'claydol', 'cloyster', 'cryogonal', 'delibird', 'dhelmise', 'donphan', 'drilbur', 'excadrill', 'forretress', 'hitmonchan', 'hitmonlee', 'hitmontop', 'kabuto', 'kabutops', 'komala', 'pheromosa', 'pineco', 'sandshrew', 'sandshrew-alola', 'sandslash', 'sandslash-alola', 'shellder', 'spinda', 'squirtle', 'starmie', 'staryu', 'steenee', 'tentacool', 'tentacruel', 'torkoal', 'tsareena', 'tyrogue', 'wartortle'];
 
 var defogMons = ['aerodactyl', 'arceus', 'arceus-bug', 'arceus-dark', 'arceus-dragon', 'arceus-electric', 'arceus-fairy', 'arceus-fighting', 'arceus-fire', 'arceus-flying', 'arceus-ghost', 'arceus-grass', 'arceus-ground', 'arceus-ice', 'arceus-poison', 'arceus-psychic', 'arceus-rock', 'arceus-steel', 'arceus-water', 'archen', 'archeops', 'articuno', 'beautifly', 'beedrill', 'braviary', 'butterfree', 'charizard', 'chatot', 'crobat', 'dartrix', 'decidueye', 'delibird', 'dragonite', 'drifblim', 'drifloon', 'ducklett', 'dustox', 'empoleon', 'farfetchd', 'fearow', 'finneon', 'flygon', 'fomantis', 'giratina', 'giratina-origin', 'gligar', 'gliscor', 'golbat', 'honchkrow', 'ho-oh', 'hoothoot', 'kartana', 'latias', 'latios', 'lugia', 'lumineon', 'lurantis', 'mandibuzz', 'mantine', 'masquerain', 'mew', 'moltres', 'mothim', 'murkrow', 'ninjask', 'noctowl', 'nuzleaf', 'pelipper', 'pidgeot', 'pidgeotto', 'pidgey', 'piplup', 'prinplup', 'rowlet', 'rufflet', 'salamence', 'scizor', 'scyther', 'seedot', 'shiftry', 'skarmory', 'skuntank', 'spearow', 'staraptor', 'staravia', 'starly', 'stunky', 'swanna', 'swellow', 'taillow', 'tapu fini', 'togekiss', 'togetic', 'tropius', 'venomoth', 'vespiquen', 'vibrava', 'vullaby', 'wingull', 'xatu', 'yanma', 'yanmega', 'zapdos', 'zubat'];
 

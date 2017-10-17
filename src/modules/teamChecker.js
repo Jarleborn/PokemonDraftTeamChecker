@@ -48,9 +48,22 @@ function test(mons) {
 function monChecker(monToCheck) {
   return new Promise(function(resolve, reject) {
     let mon = {}
-    mon.name = monToCheck.name
+    if (monToCheck.name === 'darmanitan-standard') {
+      mon.name = 'darmanitan'
+    } else if (monToCheck.name === 'meowstic-male') {
+      mon.name = 'meowstic'
+    } else if( monToCheck.name === 'gourgeist-average'){
+      mon.name = 'gourgeist'
+    }else if (monToCheck.name === 'keldeo-ordinary'){
+      mon.name = 'keldeo'
+    }else if(monToCheck.name === 'meloetta-aria'){
+      mon.name = 'meloetta'
+    }else {
+      mon.name = monToCheck.name
+    }
+
     mon.type = monToCheck.types
-    if (monToCheck.name === 'thundurus-incarnate') {
+    if (mon.name === 'thundurus-incarnate') {
       mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/thundurus.gif'
     }else if (mon.name === 'tornadus-incarnate') {
       mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/tornadus.gif'
@@ -58,8 +71,10 @@ function monChecker(monToCheck) {
       mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/landorus.gif'
     }else if (mon.name === 'shaymin-land') {
       mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/shaymin.gif'
+    } else if (mon.name === 'meowstic-male') {
+      mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/meowstic.gif'
     } else {
-      mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/'+monToCheck.name+'.gif'
+      mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/'+mon.name+'.gif'
     }
     mon.hazards = []
     mon.removal = []

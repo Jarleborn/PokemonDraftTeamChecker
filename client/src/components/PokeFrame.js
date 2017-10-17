@@ -51,6 +51,21 @@ export default class PokeFrame extends Component {
       if (monsArr[i] === 'shaymin-s') {
         monsArr[i] = 'shaymin-sky'
       }
+      if (monsArr[i] === 'meowstic') {
+        monsArr[i] = 'meowstic-male'
+      }
+      if (monsArr[i] === 'darmanitan') {
+        monsArr[i] = 'darmanitan-standard'
+      }
+      if (monsArr[i] === 'gourgeist') {
+        monsArr[i] = 'gourgeist-average'
+      }
+      if (monsArr[i] === 'keldeo') {
+        monsArr[i]  = 'keldeo-ordinary'
+      }
+      if(monsArr[i] === 'meloetta'){
+        monsArr[i] = 'meloetta-aria'
+      }
       console.log(monsArr[i])
     }
     return monsArr
