@@ -4,8 +4,7 @@ export default class TypeList extends Component {
   constructor(props){
   	super(props)
   	this.setState({'types': props.types})
-    this.setState({'missingTypes': props.missingTypes})
-    console.log(this.props)
+    this.setState({'missingTypes': props.missingTypes})    
   }
   render() {
     return (

@@ -19,14 +19,18 @@ function test(mons) {
         monChecker(mon)
       )
       .catch(function(error) {
-        console.log('There was an ERROR: ', error)
+        // console.log(error.statusCode)
+        // console.log(error.options.url.substr(33,1000))
+        reject('there where some problem with ' + error.options.url.substr(33,1000) + ' maybe you spelled it wrong' )
       })
     )
     }
     return Promise.all(hold)
     .then(res=> {
+      // console.log(res)
       resolve(res)
     })
+    .catch(err => resolve(err))
   })
 
 }
@@ -34,6 +38,7 @@ function test(mons) {
 
 function monChecker(monToCheck) {
   return new Promise(function(resolve, reject) {
+    // console.log(monToCheck)
     let mon = {}
     if (monToCheck.name === 'darmanitan-standard') {
       mon.name = 'darmanitan'

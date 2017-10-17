@@ -106,7 +106,8 @@ app.post('/getMons', jsonParser, function (req, res) {
   Object(__WEBPACK_IMPORTED_MODULE_0__modules_teamChecker__["b" /* test */])(req.body.mons).then(function (resp) {
     return res.send(resp);
   }).catch(function (err) {
-    return console.log(err);
+    console.log(err);
+    res.send(JSON.stringify({ 'error': err }));
   });
 });
 
@@ -163,17 +164,23 @@ function test(mons) {
       .then(function (mon) {
         return monChecker(mon);
       }).catch(function (error) {
-        console.log('There was an ERROR: ', error);
+        // console.log(error.statusCode)
+        // console.log(error.options.url.substr(33,1000))
+        reject('there where some problem with ' + error.options.url.substr(33, 1000) + ' maybe you spelled it wrong');
       }));
     }
     return Promise.all(hold).then(function (res) {
+      // console.log(res)
       resolve(res);
+    }).catch(function (err) {
+      return resolve(err);
     });
   });
 }
 
 function monChecker(monToCheck) {
   return new Promise(function (resolve, reject) {
+    // console.log(monToCheck)
     var mon = {};
     if (monToCheck.name === 'darmanitan-standard') {
       mon.name = 'darmanitan';

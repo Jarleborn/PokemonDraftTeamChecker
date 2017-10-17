@@ -24,7 +24,10 @@ app.post('/getMons', jsonParser, function (req, res) {
   console.log(req.body.mons )
   test(req.body.mons)
   .then(resp => res.send(resp))
-  .catch(err => console.log(err))
+  .catch(err => {
+    console.log(err)
+    res.send(JSON.stringify({'error':err}))
+  })
 })
 
 app.listen(port, function() {

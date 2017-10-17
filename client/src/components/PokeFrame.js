@@ -6,17 +6,10 @@ import types from '../lib/types'
 
 export default class PokeFrame extends Component {
   componentWillMount() {
-    this.setState({'data':''})
-    this.setState({'hazards':''})
-    this.setState({'removal':''})
-    this.setState({'voltTurn':''})
-    this.setState({'types':''})
-    this.setState({'loading':false})
-    this.setState({'missingTypes':''})
+    this.emptyState()
   }
   constructor(props){
     super()
-    // this.submitMons({'mons':['xatu', 'natu', 'ditto', 'mew']})
     this.state = {
       value: 'Write your mons here and seperate them with comma',
     }
@@ -24,11 +17,19 @@ export default class PokeFrame extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  emptyState(){
+    this.setState({'data':''})
+    this.setState({'hazards':''})
+    this.setState({'removal':''})
+    this.setState({'voltTurn':''})
+    this.setState({'types':''})
+    this.setState({'loading':false})
+    this.setState({'serviceText': 'loading'})
+    this.setState({'missingTypes':''})
+  }
   reformMons(mons){
-    console.log(mons.toLowerCase().replace(/\s/g,'').split(','))
     let monsArr = mons.toLowerCase().replace(/\s/g,'').split(',')
     for (var i = 0; i < monsArr.length; i++) {
-      console.log(monsArr[i])
       if (monsArr[i] === 'thundurus' || monsArr[i] === 'thundurus-i') {
         monsArr[i] = 'thundurus-incarnate'
       }
@@ -68,13 +69,12 @@ export default class PokeFrame extends Component {
       if(monsArr[i] === 'meloetta'){
         monsArr[i] = 'meloetta-aria'
       }
-      console.log(monsArr[i])
     }
     return monsArr
   }
   submitMons(monsToFetch){
+    this.emptyState()
     this.setState({'loading':true})
-    console.log(monsToFetch)
     fetch('http://localhost:1338/getMons', {
       headers: {
         'Accept': 'application/json',
@@ -87,19 +87,25 @@ export default class PokeFrame extends Component {
       return res.json()
     })
     .then(resJson => {
-      this.setState({'loading':false})
-      this.setState({'data': resJson})
-      this.sortOutHazards(this.state.data)
-      .then(res => this.setState({'hazards': res}))
-      this.sortOutRemoval(this.state.data)
-      .then(res => this.setState({'removal': res}))
-      this.sortOutVoltTurn(this.state.data)
-      .then(res => this.setState({'voltTurn': res}))
-      this.sortOutTypes(this.state.data)
-      .then(res => {
-        this.setState({'types': res})
-        this.findMissingTypes()
-      })
+      console.log(resJson)
+      if(!resJson.error){
+        this.setState({'loading':false})
+        this.setState({'data': resJson})
+        this.sortOutHazards(this.state.data)
+        .then(res => this.setState({'hazards': res}))
+        this.sortOutRemoval(this.state.data)
+        .then(res => this.setState({'removal': res}))
+        this.sortOutVoltTurn(this.state.data)
+        .then(res => this.setState({'voltTurn': res}))
+        this.sortOutTypes(this.state.data)
+        .then(res => {
+          this.setState({'types': res})
+          this.findMissingTypes()
+        })
+      } else{
+        console.log('errrrrrrrrrrrrror')
+        this.setState({'serviceText':resJson.error})
+      }
 
     })
   }
@@ -121,14 +127,10 @@ export default class PokeFrame extends Component {
 
     let missingTypesArr = []
     for (var i = 0; i < types.length; i++) {
-      console.log(this.state.types.includes(types[i]))
-      console.log(types[i])
       if (!this.state.types.includes(types[i])) {
         missingTypesArr.push(types[i])
-        console.log(missingTypesArr)
       }
     }
-    console.log(missingTypesArr)
     if (missingTypesArr.length < 1) {
       missingTypesArr.push('none')
       missingTypesArr.push('are missing')
@@ -186,32 +188,30 @@ export default class PokeFrame extends Component {
     this.submitMons(this.state.value)
   }
 
-
-
   render() {
     return (
       <div className="class-name">
-          { this.state.missingTypes[0] ?
-            <div id="monData">
-              <PokeList data={this.state.data}/>
-              <hr />
-              <TypeList types={this.state.types} missingTypes={this.state.missingTypes}/>
-              <HazardList hazards={this.state.hazards} removal={this.state.removal} voltTurn={this.state.voltTurn}/>
-              <hr />
-            </div>
-            :
-            <div id="submitform">
-            <form onSubmit={this.handleSubmit}>
-              <label>
-                <textarea rows='12' value={this.state.value} onChange={this.handleChange} />
-              </label>
-              <br />
-              <input type="submit" value="Submit" />
-            </form>
-            </div>
-          }
+      { this.state.missingTypes[0] ?
+        <div id="monData">
+        <PokeList data={this.state.data}/>
+        <hr />
+        <TypeList types={this.state.types} missingTypes={this.state.missingTypes}/>
+        <HazardList hazards={this.state.hazards} removal={this.state.removal} voltTurn={this.state.voltTurn}/>
+        <hr />
+        </div>
+        :
+        <div id="submitform">
+        <form onSubmit={this.handleSubmit}>
+        <label>
+        <textarea rows='12' value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <br />
+        <input type="submit" value="Submit" />
+        </form>
+        </div>
+      }
 
-          {this.state.loading ? <h1>Loading</h1> : ''}
+      {this.state.loading ? <h1>{this.state.serviceText}</h1> : ''}
       </div>
     )
   }

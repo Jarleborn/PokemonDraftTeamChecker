@@ -5,8 +5,7 @@ export default class HazardList extends Component {
   	super(props)
   	this.setState({'hazards': props.hazards})
     this.setState({'removal': props.removal})
-    this.setState({'voltTurn': props.voltTurn})
-    console.log(this.props)
+    this.setState({'voltTurn': props.voltTurn})    
   }
   render() {
     return (
