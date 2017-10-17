@@ -1,6 +1,10 @@
 import React,{Component} from 'react'
+import PokeList from './PokeList'
 
 export default class PokeFrame extends Component {
+  componentWillMount() {
+    this.setState({'data':''})
+  }
   constructor(props){
     super()
     fetch('http://localhost:1337/test')
@@ -8,6 +12,7 @@ export default class PokeFrame extends Component {
       return res.json()
     })
     .then(resJson => {
+
       this.setState({'data': resJson})
       this.sortOutHazards(this.state.data)
       .then(res => this.setState({'hazards': res}))
@@ -20,7 +25,6 @@ export default class PokeFrame extends Component {
     })
 
   }
-
   sortOutHazards(data){
     return new Promise(function(resolve, reject) {
       let hazards = []
@@ -47,7 +51,6 @@ export default class PokeFrame extends Component {
       resolve(removal)
     })
   }
-
   sortOutVoltTurn(data){
     return new Promise(function(resolve, reject) {
       let voltTurn = []
@@ -78,7 +81,7 @@ export default class PokeFrame extends Component {
   render() {
     return (
       <div className="class-name">
-          content
+          { this.state.data[1] ? <PokeList data={this.state.data}/> : <h5> Loading.. </h5>}
       </div>
     )
   }

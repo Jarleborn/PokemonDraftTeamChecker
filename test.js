@@ -44,3 +44,11 @@ const rapidSpinMons = [
 const defogMons = [
 
 ]
+
+
+{this.props.mons.map(function (mon) {
+  <div>
+    <h2>{mon.name}</h2>
+    <img src={mon.sprite} />
+  </div>
+})}

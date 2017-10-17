@@ -17,7 +17,16 @@ app.get('/checkTeam', function (req, res) {
 })
 
 app.get('/test', function (req, res) {
-  test(['gengar','bisharp', 'hitmonlee', 'roserade', 'masquerain'])
+  test(['zygarde',
+    'hawlucha',
+    'chandelure',
+    'roserade',
+    'mesprit',
+    'rhydon',
+    'aggron-mega',
+    'galvantula',
+    'sneasel',
+  ])
   .then(resp => res.send(resp))
   .catch(err => console.log(err))
 })

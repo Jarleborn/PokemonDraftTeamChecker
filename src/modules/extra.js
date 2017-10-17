@@ -58,7 +58,9 @@ const stickyWebMon = [
 
 const rocksMon = [
   'aerodactyl',
+  'aerodactyl-mega',
   'aggron',
+  'aggron-mega',
   'amaura',
   'anorith',
   'arceus',
@@ -98,6 +100,7 @@ const rocksMon = [
   'bronzong',
   'bronzor',
   'camerupt',
+  'camerupt-mega',
   'carbink',
   'carracosta',
   'celebi',
