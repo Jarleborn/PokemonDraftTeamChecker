@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "backpack-core": "^0.4.2",
+    "body-parser": "^1.18.2",
     "express": "^4.15.5",
     "pokedex-promise-v2": "^3.0.3"
   },

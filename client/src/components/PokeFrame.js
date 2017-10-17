@@ -13,7 +13,17 @@ export default class PokeFrame extends Component {
   }
   constructor(props){
     super()
-    fetch('http://localhost:1337/test')
+    this.submitMons()
+  }
+
+  submitMons(){
+    fetch('http://localhost:1337/test', {
+      method:'POST',
+      body:[
+        'charizard',
+        'xatu',
+      ],
+    })
     .then(res => {
       return res.json()
     })
@@ -29,7 +39,6 @@ export default class PokeFrame extends Component {
       this.sortOutTypes(this.state.data)
       .then(res => this.setState({'types': res}))
     })
-
   }
   sortOutHazards(data){
     return new Promise(function(resolve, reject) {
@@ -76,7 +85,9 @@ export default class PokeFrame extends Component {
       for (var i = 0; i < data.length; i++) {
         if (data[i].type.length > 0) {
           for (var j = 0; j < data[i].type.length; j++) {
-            type.push(data[i].type[j].type.name)
+            if (!type.includes(data[i].type[j].type.name)) {
+              type.push(data[i].type[j].type.name)
+            }
           }
         }
       }
@@ -92,9 +103,8 @@ export default class PokeFrame extends Component {
               <PokeList data={this.state.data}/>
               <hr />
               <TypeList types={this.state.types} />
-              <HazardList hazards={this.state.hazards} removal={this.state.removal}/>
-              <VoltTurnList voltTurn={this.state.voltTurn} />
-
+              <HazardList hazards={this.state.hazards} removal={this.state.removal} voltTurn={this.state.voltTurn}/>
+              <hr />
             </div>
             : <h5> Loading.. </h5>}
       </div>

@@ -11,7 +11,7 @@ export default class PokeList extends Component {
       {this.props.data.map(function (mon) {
         return <div className="mons">
           <h2>{mon.name}</h2>
-          <img src={mon.sprite} />
+          <img role={mon.name} src={mon.sprite} />
         </div>
       })}
       </div>

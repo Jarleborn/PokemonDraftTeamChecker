@@ -2,18 +2,18 @@ const Pokedex = require('pokedex-promise-v2')
 const P = new Pokedex()
 import {toxicSpikesMons, stickyWebMon, rocksMon, spikesMon, rapidSpinMons, defogMons} from './extra'
 
-function getInitialData(array){
-  for (var i = 0; i < array.length; i++) {
-    P.getPokemonByName(array[i]) // with Promise
-    .then(function(response) {
-      console.log(response[0])
-    })
-    .catch(function(error) {
-      console.log('There was an ERROR: ', error)
-    })
-
-  }
-}
+// function getInitialData(array){
+//   for (var i = 0; i < array.length; i++) {
+//     P.getPokemonByName(array[i]) // with Promise
+//     .then(function(response) {
+//       console.log(response[0])
+//     })
+//     .catch(function(error) {
+//       console.log('There was an ERROR: ', error)
+//     })
+//
+//   }
+// }
 
 
 function test(mons) {
@@ -38,7 +38,6 @@ function test(mons) {
     }
     return Promise.all(hold)
     .then(res=> {
-      console.log(res)
       resolve(res)
     })
   })
@@ -51,11 +50,11 @@ function monChecker(monToCheck) {
     let mon = {}
     mon.name = monToCheck.name
     mon.type = monToCheck.types
-    mon.sprite = monToCheck.sprites.front_default
+    mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/'+monToCheck.name+'.gif'
     mon.hazards = []
     mon.removal = []
     mon.voltTurn = []
-
+    console.log(mon.sprite)
     const voltTurn = ['volt-switch', 'u-turn']
 
 
@@ -64,7 +63,7 @@ function monChecker(monToCheck) {
 
     }
     for (var i = 0; i < monToCheck.moves.length; i++) {
-      
+
       if (voltTurn.includes(monToCheck.moves[i].move.name)) {
         mon.voltTurn.push({
           'type':monToCheck.moves[i].move.name,
@@ -117,4 +116,4 @@ function monChecker(monToCheck) {
   })
 }
 
-export {getInitialData, test}
+export {test}
