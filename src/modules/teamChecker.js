@@ -50,11 +50,21 @@ function monChecker(monToCheck) {
     let mon = {}
     mon.name = monToCheck.name
     mon.type = monToCheck.types
-    mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/'+monToCheck.name+'.gif'
+    if (monToCheck.name === 'thundurus-incarnate') {
+      mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/thundurus.gif'
+    }else if (mon.name === 'tornadus-incarnate') {
+      mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/tornadus.gif'
+    }else if (mon.name === 'landorus-incarnate') {
+      mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/landorus.gif'
+    }else if (mon.name === 'shaymin-land') {
+      mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/shaymin.gif'
+    } else {
+      mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/'+monToCheck.name+'.gif'
+    }
     mon.hazards = []
     mon.removal = []
     mon.voltTurn = []
-    
+
     const voltTurn = ['volt-switch', 'u-turn']
 
 

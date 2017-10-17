@@ -161,7 +161,7 @@ const rocksMon = [
   'krokorok',
   'krookodile',
   'lairon',
-  'landorus',
+  'landorus-incarnate',
   'landorus-therian',
   'larvitar',
   'lileep',

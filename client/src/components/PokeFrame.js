@@ -24,12 +24,41 @@ export default class PokeFrame extends Component {
 
   reformMons(mons){
     console.log(mons.toLowerCase().replace(/\s/g,'').split(','))
-    return mons.toLowerCase().replace(/\s/g,'').split(',')
+    let monsArr = mons.toLowerCase().replace(/\s/g,'').split(',')
+    for (var i = 0; i < monsArr.length; i++) {
+      console.log(monsArr[i])
+      if (monsArr[i] === 'thundurus' || monsArr[i] === 'thundurus-i') {
+        monsArr[i] = 'thundurus-incarnate'
+      }
+      if (monsArr[i] === 'thundurus-t') {
+        monsArr[i] = 'thundurus-therian'
+      }
+      if (monsArr[i] === 'tornadus' || monsArr[i] === 'tornadus-i') {
+        monsArr[i] = 'tornadus-incarnate'
+      }
+      if (monsArr[i] === 'tornadus-t') {
+        monsArr[i] = 'tornadus-therian'
+      }
+      if (monsArr[i] === 'landorus' || monsArr[i] === 'landorus-i') {
+        monsArr[i] = 'landorus-incarnate'
+      }
+      if (monsArr[i] === 'landorus-t') {
+        monsArr[i] = 'landorus-therian'
+      }
+      if (monsArr[i] === 'shaymin' || monsArr[i] === 'shaymin-l') {
+        monsArr[i] = 'shaymin-land'
+      }
+      if (monsArr[i] === 'shaymin-s') {
+        monsArr[i] = 'shaymin-sky'
+      }
+      console.log(monsArr[i])
+    }
+    return monsArr
   }
   submitMons(monsToFetch){
     this.setState({'loading':true})
     console.log(monsToFetch)
-    fetch('http://localhost:1337/test', {
+    fetch('http://localhost:1338/getMons', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
