@@ -98,7 +98,7 @@ app.get('/checkTeam', function (req, res) {
 });
 
 app.get('/test', function (req, res) {
-  Object(__WEBPACK_IMPORTED_MODULE_0__modules_teamChecker__["b" /* test */])(['zygarde', 'hawlucha', 'chandelure', 'roserade', 'mesprit', 'rhydon', 'aggron-mega', 'galvantula', 'sneasel']).then(function (resp) {
+  Object(__WEBPACK_IMPORTED_MODULE_0__modules_teamChecker__["b" /* test */])(['zygarde', 'hawlucha', 'chandelure', 'roserade', 'mesprit', 'rhydon', 'aggron-mega', 'galvantula', 'sneasel', 'donphan']).then(function (resp) {
     return res.send(resp);
   }).catch(function (err) {
     return console.log(err);

@@ -26,6 +26,7 @@ app.get('/test', function (req, res) {
     'aggron-mega',
     'galvantula',
     'sneasel',
+    'donphan',
   ])
   .then(resp => res.send(resp))
   .catch(err => console.log(err))

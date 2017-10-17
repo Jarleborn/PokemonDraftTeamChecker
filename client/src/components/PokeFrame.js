@@ -1,9 +1,15 @@
 import React,{Component} from 'react'
 import PokeList from './PokeList'
-
+import TypeList from './TypeList'
+import HazardList from './HazardList'
+import VoltTurnList from './VoltTurnList'
 export default class PokeFrame extends Component {
   componentWillMount() {
     this.setState({'data':''})
+    this.setState({'hazards':''})
+    this.setState({'removal':''})
+    this.setState({'voltTurn':''})
+    this.setState({'types':''})
   }
   constructor(props){
     super()
@@ -21,7 +27,7 @@ export default class PokeFrame extends Component {
       this.sortOutVoltTurn(this.state.data)
       .then(res => this.setState({'voltTurn': res}))
       this.sortOutTypes(this.state.data)
-      .then(res => this.setState({types: res}))
+      .then(res => this.setState({'types': res}))
     })
 
   }
@@ -81,7 +87,16 @@ export default class PokeFrame extends Component {
   render() {
     return (
       <div className="class-name">
-          { this.state.data[1] ? <PokeList data={this.state.data}/> : <h5> Loading.. </h5>}
+          { this.state.types[1] ?
+            <div id="monData">
+              <PokeList data={this.state.data}/>
+              <hr />
+              <TypeList types={this.state.types} />
+              <HazardList hazards={this.state.hazards} removal={this.state.removal}/>
+              <VoltTurnList voltTurn={this.state.voltTurn} />
+
+            </div>
+            : <h5> Loading.. </h5>}
       </div>
     )
   }
