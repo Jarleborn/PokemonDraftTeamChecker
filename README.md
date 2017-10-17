@@ -4,4 +4,4 @@ The goal with this little project is to have a page where you can past in a Poke
 
 Preview pic
 
-![Preview.png](preview.png)
+![Preview.png](preview2.png)
