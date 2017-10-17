@@ -9,8 +9,8 @@ export default class TypeList extends Component {
   render() {
     return (
       <div className="types">
-      
-      <h2> The team has {this.props.types.length} out of the 18 avalible types </h2>
+
+      <h2> The team has {this.props.types.length - 1} out of the 18 avalible types </h2>
       {this.props.types.map(function (type) {
         return <p>{type}</p>
       })}
