@@ -1,0 +1,13 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "semi": ["error", "never"],
+    "quotes": ["error", "single"],
+    "comma-dangle": ["error", "always-multiline"],
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "import/no-webpack-loader-syntax": 0,
+    "react/no-danger-with-children": 0,
+    "react/style-prop-object": 0,
+    "brace-style":["error"]
+  }
+}
