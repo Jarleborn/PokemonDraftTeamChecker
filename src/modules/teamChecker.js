@@ -54,7 +54,7 @@ function monChecker(monToCheck) {
     mon.hazards = []
     mon.removal = []
     mon.voltTurn = []
-    console.log(mon.sprite)
+    
     const voltTurn = ['volt-switch', 'u-turn']
 
 

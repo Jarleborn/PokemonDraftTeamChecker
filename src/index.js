@@ -8,6 +8,8 @@ import {getInitialData, test} from './modules/teamChecker'
 console.log('hej'.green)
 
 const jsonParser = bodyParser.json()
+// app.use(bodyParser.json({ type: 'application/*+json' }))
+
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
@@ -19,20 +21,8 @@ app.get('/checkTeam', function (req, res) {
 })
 
 app.post('/test', jsonParser, function (req, res) {
-  console.log(req.body)
-  test(['zygarde',
-    'hawlucha',
-    'chandelure',
-    'roserade',
-    'mesprit',
-    'rhydon',
-    'aggron-mega',
-    'galvantula',
-    'sneasel',
-    'donphan',
-    'togekiss',
-    'bibarel',
-  ])
+  console.log(req.body.mons )  
+  test(req.body.mons)
   .then(resp => res.send(resp))
   .catch(err => console.log(err))
 })

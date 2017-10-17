@@ -10,25 +10,38 @@ export default class PokeFrame extends Component {
     this.setState({'removal':''})
     this.setState({'voltTurn':''})
     this.setState({'types':''})
+    this.setState({'loading':false})
   }
   constructor(props){
     super()
-    this.submitMons()
+    // this.submitMons({'mons':['xatu', 'natu', 'ditto', 'mew']})
+    this.state = {
+      value: 'Write your mons here and seperate them with comma',
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  submitMons(){
+  reformMons(mons){
+    console.log(mons.toLowerCase().replace(/\s/g,'').split(','))
+    return mons.toLowerCase().replace(/\s/g,'').split(',')
+  }
+  submitMons(monsToFetch){
+    this.setState({'loading':true})
+    console.log(monsToFetch)
     fetch('http://localhost:1337/test', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
       method:'POST',
-      body:[
-        'charizard',
-        'xatu',
-      ],
+      body:JSON.stringify({'mons': this.reformMons(monsToFetch)}),
     })
     .then(res => {
       return res.json()
     })
     .then(resJson => {
-
+      this.setState({'loading':false})
       this.setState({'data': resJson})
       this.sortOutHazards(this.state.data)
       .then(res => this.setState({'hazards': res}))
@@ -95,6 +108,17 @@ export default class PokeFrame extends Component {
     })
   }
 
+  handleChange(event) {
+    this.setState({value: event.target.value})
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    this.submitMons(this.state.value)
+  }
+
+
+
   render() {
     return (
       <div className="class-name">
@@ -106,7 +130,19 @@ export default class PokeFrame extends Component {
               <HazardList hazards={this.state.hazards} removal={this.state.removal} voltTurn={this.state.voltTurn}/>
               <hr />
             </div>
-            : <h5> Loading.. </h5>}
+            :
+            <div id="submitform">
+            <form onSubmit={this.handleSubmit}>
+              <label>
+                <textarea rows='12' value={this.state.value} onChange={this.handleChange} />
+              </label>
+              <br />
+              <input type="submit" value="Submit" />
+            </form>
+            </div>
+          }
+
+          {this.state.loading ? <h1>Loading</h1> : ''}
       </div>
     )
   }

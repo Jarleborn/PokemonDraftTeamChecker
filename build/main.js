@@ -89,6 +89,8 @@ var app = express();
 console.log('hej'.green);
 
 var jsonParser = bodyParser.json();
+// app.use(bodyParser.json({ type: 'application/*+json' }))
+
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -100,8 +102,8 @@ app.get('/checkTeam', function (req, res) {
 });
 
 app.post('/test', jsonParser, function (req, res) {
-  console.log(req.body);
-  Object(__WEBPACK_IMPORTED_MODULE_0__modules_teamChecker__["b" /* test */])(['zygarde', 'hawlucha', 'chandelure', 'roserade', 'mesprit', 'rhydon', 'aggron-mega', 'galvantula', 'sneasel', 'donphan', 'togekiss', 'bibarel']).then(function (resp) {
+  console.log(req.body.mons);
+  Object(__WEBPACK_IMPORTED_MODULE_0__modules_teamChecker__["b" /* test */])(req.body.mons).then(function (resp) {
     return res.send(resp);
   }).catch(function (err) {
     return console.log(err);
@@ -187,7 +189,7 @@ function monChecker(monToCheck) {
     mon.hazards = [];
     mon.removal = [];
     mon.voltTurn = [];
-    console.log(mon.sprite);
+
     var voltTurn = ['volt-switch', 'u-turn'];
 
     for (var j = 0; j < monToCheck.types.length; j++) {}
