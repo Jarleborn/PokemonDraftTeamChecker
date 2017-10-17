@@ -432,6 +432,26 @@ const defogMons = [
   'zubat',
 ]
 
+const types = [
+  'fire',
+  'water',
+  'grass',
+  'rock',
+  'ground',
+  'dark',
+  'ghost',
+  'psychic',
+  'fighting',
+  'steel',
+  'fairy',
+  'poison',
+  'flying',
+  'eletric',
+  'normal',
+  'ice',
+  'bug',
+  'dragon',
+]
 
 
-export {toxicSpikesMons, stickyWebMon, rocksMon, spikesMon, rapidSpinMons, defogMons}
+export {toxicSpikesMons, stickyWebMon, rocksMon, spikesMon, rapidSpinMons, defogMons, types}

@@ -1,19 +1,6 @@
 const Pokedex = require('pokedex-promise-v2')
 const P = new Pokedex()
-import {toxicSpikesMons, stickyWebMon, rocksMon, spikesMon, rapidSpinMons, defogMons} from './extra'
-
-// function getInitialData(array){
-//   for (var i = 0; i < array.length; i++) {
-//     P.getPokemonByName(array[i]) // with Promise
-//     .then(function(response) {
-//       console.log(response[0])
-//     })
-//     .catch(function(error) {
-//       console.log('There was an ERROR: ', error)
-//     })
-//
-//   }
-// }
+import {toxicSpikesMons, stickyWebMon, rocksMon, spikesMon, rapidSpinMons, defogMons, types} from './extra'
 
 
 function test(mons) {

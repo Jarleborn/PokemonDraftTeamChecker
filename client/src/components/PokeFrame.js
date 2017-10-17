@@ -2,7 +2,8 @@ import React,{Component} from 'react'
 import PokeList from './PokeList'
 import TypeList from './TypeList'
 import HazardList from './HazardList'
-import VoltTurnList from './VoltTurnList'
+import types from '../lib/types'
+
 export default class PokeFrame extends Component {
   componentWillMount() {
     this.setState({'data':''})
@@ -11,6 +12,7 @@ export default class PokeFrame extends Component {
     this.setState({'voltTurn':''})
     this.setState({'types':''})
     this.setState({'loading':false})
+    this.setState({'missingTypes':''})
   }
   constructor(props){
     super()
@@ -94,7 +96,11 @@ export default class PokeFrame extends Component {
       this.sortOutVoltTurn(this.state.data)
       .then(res => this.setState({'voltTurn': res}))
       this.sortOutTypes(this.state.data)
-      .then(res => this.setState({'types': res}))
+      .then(res => {
+        this.setState({'types': res})
+        this.findMissingTypes()
+      })
+
     })
   }
   sortOutHazards(data){
@@ -109,6 +115,25 @@ export default class PokeFrame extends Component {
       }
       resolve(hazards)
     })
+  }
+
+  findMissingTypes(){
+
+    let missingTypesArr = []
+    for (var i = 0; i < types.length; i++) {
+      console.log(this.state.types.includes(types[i]))
+      console.log(types[i])
+      if (!this.state.types.includes(types[i])) {
+        missingTypesArr.push(types[i])
+        console.log(missingTypesArr)
+      }
+    }
+    console.log(missingTypesArr)
+    if (missingTypesArr.length < 1) {
+      missingTypesArr.push('none')
+      missingTypesArr.push('are missing')
+    }
+    this.setState({'missingTypes':missingTypesArr})
   }
   sortOutRemoval(data){
     return new Promise(function(resolve, reject) {
@@ -166,11 +191,11 @@ export default class PokeFrame extends Component {
   render() {
     return (
       <div className="class-name">
-          { this.state.types[1] ?
+          { this.state.missingTypes[0] ?
             <div id="monData">
               <PokeList data={this.state.data}/>
               <hr />
-              <TypeList types={this.state.types} />
+              <TypeList types={this.state.types} missingTypes={this.state.missingTypes}/>
               <HazardList hazards={this.state.hazards} removal={this.state.removal} voltTurn={this.state.voltTurn}/>
               <hr />
             </div>

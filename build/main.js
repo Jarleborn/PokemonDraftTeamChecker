@@ -149,20 +149,6 @@ var Pokedex = __webpack_require__(7);
 var P = new Pokedex();
 
 
-// function getInitialData(array){
-//   for (var i = 0; i < array.length; i++) {
-//     P.getPokemonByName(array[i]) // with Promise
-//     .then(function(response) {
-//       console.log(response[0])
-//     })
-//     .catch(function(error) {
-//       console.log('There was an ERROR: ', error)
-//     })
-//
-//   }
-// }
-
-
 function test(mons) {
   var hold = [];
   return new Promise(function (resolve, reject) {
@@ -296,6 +282,7 @@ module.exports = require("pokedex-promise-v2");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return spikesMon; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return rapidSpinMons; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return defogMons; });
+/* unused harmony export types */
 var toxicSpikesMons = ['ariados', 'beedrill', 'beedrill-mega', 'cloyster', 'cofagrigus', 'dragalge', 'drapion', 'forretress', 'froakie', 'frogadier', 'garbodor', 'greninja', 'greninja-ash', 'koffing', 'mareanie', 'nidoking', 'nidoqueen', 'nidoran-f', 'nidoran-m', 'nidorina', 'nidorino', 'nihilego', 'omanyte', 'omastar', 'pineco', 'qwilfish', 'roselia', 'roserade', 'scolipede', 'skorupi', 'skrelp', 'spinarak', 'tentacool', 'tentacruel', 'toxapex', 'trubbish', 'venipede', 'venomoth', 'venonat', 'weezing', 'whirlipede', 'yamask'];
 
 var stickyWebMon = ['ariados', 'galvantula', 'kricketune', 'leavanny', 'masquerain', 'sewaddle', 'shuckle', 'spinarak', 'surskit', 'swadloon'];
@@ -307,6 +294,8 @@ var spikesMon = ['accelgor', 'budew', 'bunnelby', 'cacnea', 'cacturne', 'chesnau
 var rapidSpinMons = ['anorith', 'armaldo', 'avalugg', 'baltoy', 'bergmite', 'blastoise', 'blastoise-mega', 'bounsweet', 'claydol', 'cloyster', 'cryogonal', 'delibird', 'dhelmise', 'donphan', 'drilbur', 'excadrill', 'forretress', 'hitmonchan', 'hitmonlee', 'hitmontop', 'kabuto', 'kabutops', 'komala', 'pheromosa', 'pineco', 'sandshrew', 'sandshrew-alola', 'sandslash', 'sandslash-alola', 'shellder', 'spinda', 'squirtle', 'starmie', 'staryu', 'steenee', 'tentacool', 'tentacruel', 'torkoal', 'tsareena', 'tyrogue', 'wartortle'];
 
 var defogMons = ['aerodactyl', 'arceus', 'arceus-bug', 'arceus-dark', 'arceus-dragon', 'arceus-electric', 'arceus-fairy', 'arceus-fighting', 'arceus-fire', 'arceus-flying', 'arceus-ghost', 'arceus-grass', 'arceus-ground', 'arceus-ice', 'arceus-poison', 'arceus-psychic', 'arceus-rock', 'arceus-steel', 'arceus-water', 'archen', 'archeops', 'articuno', 'beautifly', 'beedrill', 'braviary', 'butterfree', 'charizard', 'chatot', 'crobat', 'dartrix', 'decidueye', 'delibird', 'dragonite', 'drifblim', 'drifloon', 'ducklett', 'dustox', 'empoleon', 'farfetchd', 'fearow', 'finneon', 'flygon', 'fomantis', 'giratina', 'giratina-origin', 'gligar', 'gliscor', 'golbat', 'honchkrow', 'ho-oh', 'hoothoot', 'kartana', 'latias', 'latios', 'lugia', 'lumineon', 'lurantis', 'mandibuzz', 'mantine', 'masquerain', 'mew', 'moltres', 'mothim', 'murkrow', 'ninjask', 'noctowl', 'nuzleaf', 'pelipper', 'pidgeot', 'pidgeotto', 'pidgey', 'piplup', 'prinplup', 'rowlet', 'rufflet', 'salamence', 'scizor', 'scyther', 'seedot', 'shiftry', 'skarmory', 'skuntank', 'spearow', 'staraptor', 'staravia', 'starly', 'stunky', 'swanna', 'swellow', 'taillow', 'tapu fini', 'togekiss', 'togetic', 'tropius', 'venomoth', 'vespiquen', 'vibrava', 'vullaby', 'wingull', 'xatu', 'yanma', 'yanmega', 'zapdos', 'zubat'];
+
+var types = ['fire', 'water', 'grass', 'rock', 'ground', 'dark', 'ghost', 'psychic', 'fighting', 'steel', 'fairy', 'poison', 'flying', 'eletric', 'normal', 'ice', 'bug', 'dragon'];
 
 
 
