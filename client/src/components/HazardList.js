@@ -5,7 +5,8 @@ export default class HazardList extends Component {
   	super(props)
   	this.setState({'hazards': props.hazards})
     this.setState({'removal': props.removal})
-    this.setState({'voltTurn': props.voltTurn})    
+    this.setState({'voltTurn': props.voltTurn})
+    this.setState({'abilities': props.abilities})
   }
   render() {
     return (
@@ -24,6 +25,15 @@ export default class HazardList extends Component {
       <h2> Volt-turn this team has avalible </h2>
       {this.props.voltTurn.map(function (haz) {
         return <p>{haz.mon} has {haz.type}</p>
+      })}
+      <h2> Possible abilities this team has avalible </h2>
+      {this.props.abilities.map(function (haz) {
+        return <p>{haz.name} has <b>{
+          haz.abilities.map(function (abb) {
+            console.log(abb)
+            return abb + ', '
+          })
+        }</b></p>
       })}
       </div>
     )

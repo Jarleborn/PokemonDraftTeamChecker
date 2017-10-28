@@ -26,6 +26,7 @@ export default class PokeFrame extends Component {
     this.setState({'loading':false})
     this.setState({'serviceText': 'loading'})
     this.setState({'missingTypes':''})
+    this.setState({'abilities':''})
   }
   reformMons(mons){
     let monsArr = mons.toLowerCase().replace(/\s/g,'').split(',')
@@ -164,6 +165,15 @@ export default class PokeFrame extends Component {
           this.setState({'loading':true})
           this.setState({'serviceText':err.message})
         })
+        this.sortOutAbilities(this.state.data)
+        .then(res =>{
+          console.log(res);
+          this.setState({'abilities': res})
+        })
+        .catch(err => {
+          this.setState({'loading':true})
+          this.setState({'serviceText':err.message})
+        })
         this.sortOutVoltTurn(this.state.data)
         .then(res => this.setState({'voltTurn': res}))
         .catch(err => {
@@ -201,6 +211,26 @@ export default class PokeFrame extends Component {
         }
       }
       resolve(hazards)
+    })
+  }
+
+  sortOutAbilities(data){
+    let abilities = []
+    return new Promise(function(resolve, reject) {
+      if (!data) {
+        reject('error in abilities')
+      }
+
+      let tmp = {}
+      for (var i = 0; i < data.length; i++) {
+        tmp.name = data[i].name
+        tmp.abilities = data[i].abilities
+        abilities.push(tmp)
+        tmp = {}
+      }
+
+      console.log(abilities,'aby')
+      resolve(abilities)
     })
   }
 
@@ -286,7 +316,7 @@ export default class PokeFrame extends Component {
         <PokeList data={this.state.data}/>
         <hr />
         <TypeList types={this.state.types} missingTypes={this.state.missingTypes}/>
-        <HazardList hazards={this.state.hazards} removal={this.state.removal} voltTurn={this.state.voltTurn}/>
+        <HazardList hazards={this.state.hazards} abilities={this.state.abilities} removal={this.state.removal} voltTurn={this.state.voltTurn}/>
         <hr />
         </div>
         :

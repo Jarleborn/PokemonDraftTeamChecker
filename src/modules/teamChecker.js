@@ -40,6 +40,7 @@ function monChecker(monToCheck) {
 
   return new Promise(function(resolve, reject) {
     let mon = {}
+
     if (monToCheck.name === 'darmanitan-standard') {
       mon.name = 'darmanitan'
     } else if (monToCheck.name === 'meowstic-male') {
@@ -85,17 +86,12 @@ function monChecker(monToCheck) {
     mon.removal = []
     mon.voltTurn = []
     mon.moves = monToCheck.moves
-    // getMovesForEvoline(mon.name)
-    // .then(moves =>{
-    //   console.log('__________________________________________________________________________________________');
-    //   console.log(moves.name)
-    //   for (var i = 0; i < moves.moves[0].length; i++) {
-    //     console.log(moves.moves[0][i].move.name)
-    //   }
-    //
-    //
-    //   mon.moves.push(moves)
-    // })
+    mon.abilities = []
+
+    for (var i = 0; i < monToCheck.abilities.length; i++) {
+      mon.abilities.push(monToCheck.abilities[i].ability.name)
+    }
+
     const voltTurn = ['volt-switch', 'u-turn']
 
 
@@ -152,6 +148,7 @@ function monChecker(monToCheck) {
         'mon':monToCheck.name,
       })
     }
+    console.log(mon)
     resolve(mon)
   })
 }
