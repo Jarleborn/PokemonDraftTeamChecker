@@ -416,7 +416,7 @@ const defogMons = [
   'swanna',
   'swellow',
   'taillow',
-  'tapu fini',
+  'tapu-fini',
   'togekiss',
   'togetic',
   'tropius',

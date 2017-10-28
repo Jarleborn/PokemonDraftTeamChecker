@@ -29,11 +29,70 @@ export default class PokeFrame extends Component {
   }
   reformMons(mons){
     let monsArr = mons.toLowerCase().replace(/\s/g,'').split(',')
+    console.log(monsArr)
     for (var i = 0; i < monsArr.length; i++) {
-      if (monsArr[i] === 'thundurus' || monsArr[i] === 'thundurus-i') {
+      if (monsArr[i].includes('%')) {
+        monsArr[i] = monsArr[i].replace('%','')
+      }
+      if (monsArr[i].includes('m.')) {
+        monsArr[i] = monsArr[i].replace('m.','')  + '-mega'
+      } else if (monsArr[i].includes('mega-')) {
+        monsArr[i] = monsArr[i].replace('mega-','')  + '-mega'
+      } else if (monsArr[i].includes('mega') && monsArr[i] !== 'meganium') {
+        monsArr[i] = monsArr[i].replace('mega','')  + '-mega'
+      }
+      if (monsArr[i].includes('alolan-')) {
+        monsArr[i] = monsArr[i].replace('alolan-','')  + '-alola'
+      }
+      if (monsArr[i].includes('alolan')) {
+        monsArr[i] = monsArr[i].replace('alolan','')  + '-alola'
+      }
+      if (monsArr[i].includes('-alolan')) {
+        monsArr[i] = monsArr[i].replace('-alolan','')  + '-alola'
+      }
+      if (monsArr[i] === 'thundurus' || monsArr[i] === 'thundurus-i' || monsArr[i] === 'thundurusi') {
         monsArr[i] = 'thundurus-incarnate'
       }
-      if (monsArr[i] === 'thundurus-t') {
+      if (monsArr[i] === 'tapubulu' ) {
+        monsArr[i] = 'tapu-bulu'
+      }
+      if(monsArr[i] === 'hoopau'){
+        monsArr[i] = 'hoopa-unbound'
+      }
+      if(monsArr[i] === 'wishiwashi'){
+        monsArr[i] = 'wishiwashi-schoold'
+      }
+      if (monsArr[i] === 'tapufini' ) {
+        monsArr[i] = 'tapu-fini'
+      }
+      if (monsArr[i] === 'tapulele' ) {
+        monsArr[i] = 'tapu-lele'
+      }
+      if (monsArr[i] === 'tapukoko' ) {
+        monsArr[i] = 'tapu-koko'
+      }
+      if(monsArr[i] === 'kyuremblack' || monsArr[i] === 'kyuremb'){
+        monsArr[i] = 'kyurem-black'
+      }
+      if(monsArr[i] === 'kyuremwhite' || monsArr[i] === 'kyuremw'){
+        monsArr[i] = 'kyurem-white'
+      }
+      if(monsArr[i] === 'rotom-w'){
+        monsArr[i] = 'rotom-wash'
+      }
+      if (monsArr[i] === 'rotom-h' ) {
+        monsArr[i] = 'rotom-heat'
+      }
+      if (monsArr[i] === 'rotom-m' ) {
+        monsArr[i] = 'rotom-mow'
+      }
+      if (monsArr[i] === 'rotom-f' ) {
+        monsArr[i] = 'rotom-frost'
+      }
+      if (monsArr[i] === 'mimikyu' ) {
+        monsArr[i] = 'mimikyu-disguised'
+      }
+      if (monsArr[i] === 'thundurus-t' || monsArr[i] === 'thundurust') {
         monsArr[i] = 'thundurus-therian'
       }
       if (monsArr[i] === 'tornadus' || monsArr[i] === 'tornadus-i') {
@@ -73,6 +132,7 @@ export default class PokeFrame extends Component {
     return monsArr
   }
   submitMons(monsToFetch){
+    console.log(JSON.stringify({'mons': this.reformMons(monsToFetch)}))
     this.emptyState()
     this.setState({'loading':true})
     fetch('http://localhost:1338/getMons', {
@@ -93,14 +153,30 @@ export default class PokeFrame extends Component {
         this.setState({'data': resJson})
         this.sortOutHazards(this.state.data)
         .then(res => this.setState({'hazards': res}))
+        .catch(err => {
+          this.setState({'loading':true})
+          this.setState({'serviceText':err.message})
+        })
         this.sortOutRemoval(this.state.data)
         .then(res => this.setState({'removal': res}))
+        .catch(err => {
+          this.setState({'loading':true})
+          this.setState({'serviceText':err.message})
+        })
         this.sortOutVoltTurn(this.state.data)
         .then(res => this.setState({'voltTurn': res}))
+        .catch(err => {
+          this.setState({'loading':true})
+          this.setState({'serviceText':err.message})
+        })
         this.sortOutTypes(this.state.data)
         .then(res => {
           this.setState({'types': res})
           this.findMissingTypes()
+        })
+        .catch(err => {
+          this.setState({'loading':true})
+          this.setState({'serviceText':err.message})
         })
       } else{
         console.log('errrrrrrrrrrrrror')
@@ -110,7 +186,11 @@ export default class PokeFrame extends Component {
     })
   }
   sortOutHazards(data){
+
     return new Promise(function(resolve, reject) {
+      if (!data) {
+        reject('error in hazards')
+      }
       let hazards = []
       for (var i = 0; i < data.length; i++) {
         if (data[i].hazards.length > 0) {
@@ -139,6 +219,9 @@ export default class PokeFrame extends Component {
   }
   sortOutRemoval(data){
     return new Promise(function(resolve, reject) {
+      if (!data) {
+        reject('error in removal')
+      }
       let removal = []
       for (var i = 0; i < data.length; i++) {
         if (data[i].removal.length > 0) {
@@ -152,6 +235,9 @@ export default class PokeFrame extends Component {
   }
   sortOutVoltTurn(data){
     return new Promise(function(resolve, reject) {
+      if (!data) {
+        reject('error in voltturn')
+      }
       let voltTurn = []
       for (var i = 0; i < data.length; i++) {
         if (data[i].voltTurn.length > 0) {
@@ -165,6 +251,9 @@ export default class PokeFrame extends Component {
   }
   sortOutTypes(data){
     return new Promise(function(resolve, reject) {
+      if (!data) {
+        reject('error in types')
+      }
       let type = []
       for (var i = 0; i < data.length; i++) {
         if (data[i].type.length > 0) {

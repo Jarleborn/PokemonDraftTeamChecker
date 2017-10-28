@@ -1,6 +1,7 @@
 const Pokedex = require('pokedex-promise-v2')
 const P = new Pokedex()
 import {toxicSpikesMons, stickyWebMon, rocksMon, spikesMon, rapidSpinMons, defogMons, types} from './extra'
+import {getMovesForEvoline} from './moveGetter'
 
 
 function test(mons) {
@@ -11,9 +12,8 @@ function test(mons) {
     team.hazards = []
     team.removal = []
     team.voltTurn = []
-
-
     for (var i = 0; i < mons.length; i++) {
+
       hold.push(P.getPokemonByName(mons[i]) // with Promise
       .then(mon =>
         monChecker(mon)
@@ -37,8 +37,8 @@ function test(mons) {
 
 
 function monChecker(monToCheck) {
+
   return new Promise(function(resolve, reject) {
-    // console.log(monToCheck)
     let mon = {}
     if (monToCheck.name === 'darmanitan-standard') {
       mon.name = 'darmanitan'
@@ -50,10 +50,13 @@ function monChecker(monToCheck) {
       mon.name = 'keldeo'
     }else if(monToCheck.name === 'meloetta-aria'){
       mon.name = 'meloetta'
+    }else if(monToCheck.name === 'mimikyu-disguised'){
+      mon.name = 'mimikyu'
+    }else if(monToCheck.name === 'wishiwashi-schoold'){
+      mon.name = 'wishiwashi'
     }else {
       mon.name = monToCheck.name
     }
-
     mon.type = monToCheck.types
     if (mon.name === 'thundurus-incarnate') {
       mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/thundurus.gif'
@@ -65,13 +68,34 @@ function monChecker(monToCheck) {
       mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/shaymin.gif'
     } else if (mon.name === 'meowstic-male') {
       mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/meowstic.gif'
+    } else if (mon.name === 'tapu-fini') {
+      mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/tapufini.gif'
+    } else if (mon.name === 'tapu-koko') {
+      mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/tapukoko.gif'
+    } else if (mon.name === 'tapu-bulu') {
+      mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/tapubulu.gif'
+    } else if (mon.name === 'tapu-lele') {
+      mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/tapulele.gif'
+    }else if (mon.name === 'zygarde-50') {
+      mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/zygarde.gif'
     } else {
       mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/'+mon.name+'.gif'
     }
     mon.hazards = []
     mon.removal = []
     mon.voltTurn = []
-
+    mon.moves = monToCheck.moves
+    // getMovesForEvoline(mon.name)
+    // .then(moves =>{
+    //   console.log('__________________________________________________________________________________________');
+    //   console.log(moves.name)
+    //   for (var i = 0; i < moves.moves[0].length; i++) {
+    //     console.log(moves.moves[0][i].move.name)
+    //   }
+    //
+    //
+    //   mon.moves.push(moves)
+    // })
     const voltTurn = ['volt-switch', 'u-turn']
 
 
@@ -128,7 +152,6 @@ function monChecker(monToCheck) {
         'mon':monToCheck.name,
       })
     }
-
     resolve(mon)
   })
 }
