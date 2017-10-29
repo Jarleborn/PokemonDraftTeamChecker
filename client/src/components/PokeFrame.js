@@ -27,6 +27,7 @@ export default class PokeFrame extends Component {
     this.setState({'serviceText': 'loading'})
     this.setState({'missingTypes':''})
     this.setState({'abilities':''})
+
   }
   reformMons(mons){
     let monsArr = mons.toLowerCase().replace(/\s/g,'').split(',')
@@ -41,6 +42,13 @@ export default class PokeFrame extends Component {
         monsArr[i] = monsArr[i].replace('mega-','')  + '-mega'
       } else if (monsArr[i].includes('mega') && monsArr[i] !== 'meganium') {
         monsArr[i] = monsArr[i].replace('mega','')  + '-mega'
+      }
+
+      if (monsArr[i] === 'charizard-x-mega') {
+        monsArr[i] = 'charizard-mega-x'
+      }
+      if (monsArr[i] === 'charizard-y-mega') {
+        monsArr[i] = 'charizard-mega-y'
       }
       if (monsArr[i].includes('alolan-')) {
         monsArr[i] = monsArr[i].replace('alolan-','')  + '-alola'
@@ -153,6 +161,7 @@ export default class PokeFrame extends Component {
       if(!resJson.error){
         this.setState({'loading':false})
         this.setState({'data': resJson})
+        this.sortOutStats(this.state.data)
         this.sortOutHazards(this.state.data)
         .then(res => this.setState({'hazards': res}))
         .catch(err => {
@@ -213,7 +222,16 @@ export default class PokeFrame extends Component {
       resolve(hazards)
     })
   }
-
+  sortOutStats(data){
+    for (var i = 0; i < data.length; i++) {
+      data[i].speed = data[i].stats[0].base_stat
+      data[i].spdef = data[i].stats[1].base_stat
+      data[i].spatk = data[i].stats[2].base_stat
+      data[i].def = data[i].stats[3].base_stat
+      data[i].atk = data[i].stats[4].base_stat
+      data[i].hp = data[i].stats[5].base_stat
+    }
+  }
   sortOutAbilities(data){
     let abilities = []
     return new Promise(function(resolve, reject) {
@@ -331,7 +349,7 @@ export default class PokeFrame extends Component {
         </div>
       }
 
-      {this.state.loading ? <h1>{this.state.serviceText}</h1> : ''}
+      {this.state.loading ? <h4>{this.state.serviceText}</h4> : ''}
       </div>
     )
   }
