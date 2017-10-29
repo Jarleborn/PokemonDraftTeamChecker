@@ -41,6 +41,10 @@ app.get('/admin', function (req, res) {
   res.send(file)
 })
 
+app.get('/', function (req, res) {
+  res.send('Haha that does not work')
+})
+
 app.listen(port, function() {
   console.log('Our app is running on http://localhost:' + port)
 })

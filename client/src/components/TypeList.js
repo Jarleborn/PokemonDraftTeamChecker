@@ -4,7 +4,7 @@ export default class TypeList extends Component {
   constructor(props){
   	super(props)
   	this.setState({'types': props.types})
-    this.setState({'missingTypes': props.missingTypes})    
+    this.setState({'missingTypes': props.missingTypes})
   }
   render() {
     return (
@@ -12,7 +12,7 @@ export default class TypeList extends Component {
 
         <h2> The team has {this.props.types.length} out of the 18  types avalible </h2>
         <div id="typesCoverd">
-        <b> Types coverd </b>
+        <b> Types covered </b>
           {this.props.types.map(function (type) {
             return <p>{type}</p>
           })}

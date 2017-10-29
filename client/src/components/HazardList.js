@@ -13,7 +13,7 @@ export default class HazardList extends Component {
     return (
       <div className="types">
 
-      <h2> Hazars this team has avalible </h2>
+      <h2> Hazards this team has avalible </h2>
       {this.props.hazards.map(function (haz) {
         return <p>{haz.mon} has {haz.type}</p>
       })}
@@ -27,7 +27,7 @@ export default class HazardList extends Component {
       {this.props.voltTurn.map(function (haz) {
         return <p>{haz.mon} has {haz.type}</p>
       })}
-      <h2> priority this team has avalible </h2>
+      <h2> Priority this team has avalible </h2>
       {this.props.priority.map(function (haz) {
         return <p>{haz.mon} has {haz.type}</p>
       })}
