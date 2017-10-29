@@ -144,8 +144,8 @@ export default class PokeFrame extends Component {
     console.log(JSON.stringify({'mons': this.reformMons(monsToFetch)}))
     this.emptyState()
     this.setState({'loading':true})
-    fetch('https://jarleborn.com/pdtc/getMons', {
-    // fetch('http://localhost:1338/getMons', {
+    // fetch('https://jarleborn.com/pdtc/getMons', {
+    fetch('http://localhost:1338/getMons', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -174,9 +174,17 @@ export default class PokeFrame extends Component {
           this.setState({'loading':true})
           this.setState({'serviceText':err.message})
         })
+        this.sortOutPriority(this.state.data)
+        .then(res => {
+          console.log(res)
+          this.setState({'priority': res})
+        })
+        .catch(err => {
+          this.setState({'loading':true})
+          this.setState({'serviceText':err.message})
+        })
         this.sortOutAbilities(this.state.data)
         .then(res =>{
-          console.log(res);
           this.setState({'abilities': res})
         })
         .catch(err => {
@@ -282,6 +290,23 @@ export default class PokeFrame extends Component {
       resolve(removal)
     })
   }
+
+  sortOutPriority(data){
+    return new Promise(function(resolve, reject) {
+      if (!data) {
+        reject('error in removal')
+      }
+      let priority = []
+      for (var i = 0; i < data.length; i++) {
+        if (data[i].priority.length > 0) {
+          for (var j = 0; j < data[i].priority.length; j++) {
+            priority.push(data[i].priority[j])
+          }
+        }
+      }
+      resolve(priority)
+    })
+  }
   sortOutVoltTurn(data){
     return new Promise(function(resolve, reject) {
       if (!data) {
@@ -334,7 +359,7 @@ export default class PokeFrame extends Component {
         <PokeList data={this.state.data}/>
         <hr />
         <TypeList types={this.state.types} missingTypes={this.state.missingTypes}/>
-        <HazardList hazards={this.state.hazards} abilities={this.state.abilities} removal={this.state.removal} voltTurn={this.state.voltTurn}/>
+        <HazardList hazards={this.state.hazards} abilities={this.state.abilities} priority={this.state.priority} removal={this.state.removal} voltTurn={this.state.voltTurn}/>
         <hr />
         </div>
         :

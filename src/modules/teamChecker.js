@@ -1,6 +1,6 @@
 const Pokedex = require('pokedex-promise-v2')
 const P = new Pokedex()
-import {toxicSpikesMons, stickyWebMon, rocksMon, spikesMon, rapidSpinMons, defogMons, types} from './extra'
+import {fakeOutMons, eSpeedMons, feintMons, fiMons, aRockMons, aquaJetMonst, bulletPunchMons, iceShardMons, machPunchMons, quickAttackMons, shadowSneakMons, suckerPunchMons, vacuumWaveMons, waterShurikanMons, toxicSpikesMons, stickyWebMon, rocksMon, spikesMon, rapidSpinMons, defogMons, types } from './extra'
 import {getMovesForEvoline} from './moveGetter'
 
 
@@ -26,11 +26,11 @@ function test(mons) {
     )
     }
     return Promise.all(hold)
-    .then(res=> {
-      // console.log(res)
-      resolve(res)
-    })
-    .catch(err => resolve(err))
+  .then(res=> {
+    // console.log(res)
+    resolve(res)
+  })
+  .catch(err => resolve(err))
   })
 
 }
@@ -91,6 +91,7 @@ function monChecker(monToCheck) {
     mon.voltTurn = []
     mon.moves = monToCheck.moves
     mon.abilities = []
+    mon.priority = []
     mon.stats = monToCheck.stats
 
     for (var i = 0; i < monToCheck.abilities.length; i++) {
@@ -153,6 +154,103 @@ function monChecker(monToCheck) {
         'mon':monToCheck.name,
       })
     }
+    if ( fakeOutMons.includes(monToCheck.name)) {
+      mon.priority.push({
+        'type':'fake-out',
+        'mon':monToCheck.name,
+      })
+    }
+    if ( eSpeedMons.includes(monToCheck.name)) {
+      mon.priority.push({
+        'type':'extreme-speed',
+        'mon':monToCheck.name,
+      })
+    }
+
+    if ( feintMons.includes(monToCheck.name)) {
+      mon.priority.push({
+        'type':'feint',
+        'mon':monToCheck.name,
+      })
+    }
+
+    if ( fiMons.includes(monToCheck.name)) {
+      mon.priority.push({
+        'type':'first-impression',
+        'mon':monToCheck.name,
+      })
+    }
+
+    if ( aRockMons.includes(monToCheck.name)) {
+      mon.priority.push({
+        'type':'accelerock',
+        'mon':monToCheck.name,
+      })
+    }
+    if ( aquaJetMonst.includes(monToCheck.name)) {
+      mon.priority.push({
+        'type':'aqua-jet',
+        'mon':monToCheck.name,
+      })
+    }
+
+    if ( bulletPunchMons.includes(monToCheck.name)) {
+      mon.priority.push({
+        'type':'bullet-punch',
+        'mon':monToCheck.name,
+      })
+    }
+
+    if ( iceShardMons.includes(monToCheck.name)) {
+      mon.priority.push({
+        'type':'ice-shard',
+        'mon':monToCheck.name,
+      })
+    }
+
+    if ( quickAttackMons.includes(monToCheck.name)) {
+      mon.priority.push({
+        'type':'quick-attack',
+        'mon':monToCheck.name,
+      })
+    }
+
+    if ( shadowSneakMons.includes(monToCheck.name)) {
+      mon.priority.push({
+        'type':'shadow-sneak',
+        'mon':monToCheck.name,
+      })
+    }
+
+    if ( suckerPunchMons.includes(monToCheck.name)) {
+      mon.priority.push({
+        'type':'sucker-punch',
+        'mon':monToCheck.name,
+      })
+    }
+
+    if ( vacuumWaveMons.includes(monToCheck.name)) {
+      mon.priority.push({
+        'type':'vacuum-wave',
+        'mon':monToCheck.name,
+      })
+    }
+
+    if (machPunchMons.includes(monToCheck.name)) {
+      mon.priority.push({
+        'type':'mach-punch',
+        'mon':monToCheck.name,
+      })
+    }
+
+    if ( waterShurikanMons.includes(monToCheck.name)) {
+      mon.priority.push({
+        'type':'water-shuriken',
+        'mon':monToCheck.name,
+      })
+    }
+
+
     console.log(mon)
     resolve(mon)
   })
