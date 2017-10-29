@@ -62,3 +62,18 @@ p{
   margin: 0;
   line-height: 2;
 }
+
+.page-footer{
+  position: relative;
+bottom: 0;
+width: 100%;
+background-color: darkred;
+}
+
+footer.page-footer {
+  background-color: darkred;
+}
+
+li a {
+  cursor: pointer;
+}
