@@ -19,9 +19,9 @@ function test(mons) {
         monChecker(mon)
       )
       .catch(function(error) {
-        // console.log(error.statusCode)
+        console.log(error.message)
         // console.log(error.options.url.substr(33,1000))
-        reject('there where some problem with ' + error.options.url.substr(33,1000) + ' maybe you spelled it wrong' )
+        reject('there where some problem with ' + error.options.url.substr(33,1000) + ' maybe you spelled it wrong. or it could be '+ error.message )
       })
     )
     }
@@ -79,6 +79,10 @@ function monChecker(monToCheck) {
       mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/tapulele.gif'
     }else if (mon.name === 'zygarde-50') {
       mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/zygarde.gif'
+    } else if (mon.name === 'charizard-mega-x') {
+      mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/charizard-megax.gif'
+    } else if (mon.name === 'charizard-mega-y') {
+      mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/charizard-megay.gif'
     } else {
       mon.sprite = 'http://play.pokemonshowdown.com/sprites/xyani/'+mon.name+'.gif'
     }
@@ -87,6 +91,7 @@ function monChecker(monToCheck) {
     mon.voltTurn = []
     mon.moves = monToCheck.moves
     mon.abilities = []
+    mon.stats = monToCheck.stats
 
     for (var i = 0; i < monToCheck.abilities.length; i++) {
       mon.abilities.push(monToCheck.abilities[i].ability.name)

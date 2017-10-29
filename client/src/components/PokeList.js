@@ -19,20 +19,20 @@ export default class PokeList extends Component {
           return <Col m={3} s={4} l={1}>
           <div className="mons">
             <h2>{mon.name}</h2>
-            <img alt="sprite" role={mon.name} src={mon.sprite} />
+            <div class="spriteHolder"><img class="sprite" alt="sprite" role={mon.name} src={mon.sprite} /></div>
             <br />
-            <i>hp</i>
-            <Line percent={mon.hp/250*100} strokeWidth="4" strokeColor="#D3D3D3" />
-            <i>Attack</i>
-            <Line percent={mon.atk/250*100} strokeWidth="4" strokeColor="#D3D3D3" />
-            <i>Defense</i>
-            <Line percent={mon.def/250*100} strokeWidth="4" strokeColor="#D3D3D3" />
-            <i>Special Attack</i>
-            <Line percent={mon.spatk/250*100} strokeWidth="4" strokeColor="#D3D3D3" />
-            <i>Special Defense</i>
-            <Line percent={mon.spdef/250*100} strokeWidth="4" strokeColor="#D3D3D3" />
-            <i>Speed</i>
-            <Line percent={mon.speed/250*100} strokeWidth="4" strokeColor="#D3D3D3" />
+            <i>hp - {mon.hp}</i>
+            <Line percent={mon.hp/255*100} strokeWidth="4" strokeColor="red" />
+            <i>Attack - {mon.atk}</i>
+            <Line percent={mon.atk/180*100} strokeWidth="4" strokeColor="orange" />
+            <i>Defense - {mon.def}</i>
+            <Line percent={mon.def/230*100} strokeWidth="4" strokeColor="yellow" />
+            <i>Special Attack - {mon.spatk}</i>
+            <Line percent={mon.spatk/180*100} strokeWidth="4" strokeColor="blue" />
+            <i>Special Defense - {mon.spdef}</i>
+            <Line percent={mon.spdef/230*100} strokeWidth="4" strokeColor="green" />
+            <i>Speed - {mon.speed}</i>
+            <Line percent={mon.speed/180*100} strokeWidth="4" strokeColor="pink" />
           </div>
           </Col>
         })}
