@@ -34,8 +34,8 @@ export default class PokeFrame extends Component {
   submitMons(monsToFetch){
     this.emptyState()
     this.setState({'loading':true})
-    // fetch('https://jarleborn.com/pdtc/getMons', {
-    fetch('http://localhost:1338/getMons', {
+    fetch('http://jarleborn.com/pdtc/getMons', {
+    //fetch('http://localhost:1338/getMons', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
